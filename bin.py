@@ -13,9 +13,22 @@ class bin:
                 "height":self.height,
                 "length":self.length,
                 "width":self.width,
-                "volume":self.height * self.length * self.width
+                "volume":(self.height * self.length * self.width),
+                "coordinates":[
+                    {
+                        "a":{"x":0,"y":0,"z":0},
+                        "b":{"x":0,"y":0,"z":10},
+                        "c":{"x":10,"y":0,"z":10},
+                        "d":{"x":10,"y":0,"z":0},
+                        "e":{"x":0,"y":10,"z":0},
+                        "f":{"x":0,"y":10,"z":10},
+                        "g":{"x":10,"y":10,"z":10},
+                        "h":{"x":10,"y":10,"z":0},
+                    }
+                ]
             }
         ]
+        self.contains = []
 
     # find the appropiate section
     def fillStrip(self,dimensions):
@@ -23,9 +36,11 @@ class bin:
         rotationA = dimensions
         rotationB = {"height":dimensions["length"],"length":dimensions["height"],"width":dimensions["width"]}
         rotationC = {"height":dimensions["width"],"length":dimensions["height"],"width":dimensions["length"]}
-        for index in range(len(self.strips)):
-            if self.strips[index]["volume"] <= volume:
-                # find if the item can be placed in an orientation that works inside of the bin
+        rotations = [rotationA,rotationB,rotationC]
+        for i in range(len(self.strips)):
+            if self.strips[i]["volume"] <= volume:
+                if max([dimensions["height"], dimensions["length"], dimensions["width"]]) <= max([self.strips[i]["length"],self.strips[i]["height"],self.strips[i]["width"]]):
+                    
         # update self.stips with new strips
         # sort self.strips from smallest to largest on volume
         # based on if the method completed successfully (found and placed a strip) or not, return true or false

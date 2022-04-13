@@ -1,4 +1,5 @@
 # imports
+import box
 
 # this is the bin class
 class bin:

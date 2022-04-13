@@ -2,7 +2,13 @@
 
 # this is the bin class
 class bin:
+    """
+    This class is for the larger bins, which there are infinite. The goal is to place smaller boxes into the least amount of larger bins.
+    """
     def __init__(self) -> None:
+        """
+        Initalize method for a bin. This object will be filled with smaller boxes. 
+        """
         self.height = 10
         self.length = 10
         self.width = 10
@@ -21,6 +27,11 @@ class bin:
 
     # find the appropiate section
     def fillStrip(self,dimensions):
+        """
+        This method looks at the unfilled areas (strips) inside of a bin and attempts to place a box inside of the bin.\n 
+        If this is accomplished, the bin will update bin.strips, and bin.contains.\n
+        This method will return True if the operation has been successfully been completed, else it returns False.
+        """
         volume = dimensions["height"] * dimensions["length"] * dimensions["width"]
         rotationA = dimensions
         rotationB = {"height":dimensions["length"],"length":dimensions["height"],"width":dimensions["width"]}
@@ -34,8 +45,10 @@ class bin:
         # sort self.strips from smallest to largest on volume
         # based on if the method completed successfully (found and placed a strip) or not, return true or false
 
-    # create the coordinate system based on dimensions
     def createCoordinates(self,height,length,width):
+        """
+        Create the coordinate system based on dimensions. These dimensions need to be entered in as listed in the method, or the coordinates will be wrong.
+        """
         coordinates = {
             "a":{"x":0,"y":0,"z":0},
             "b":{"x":0,"y":0,"z":height},

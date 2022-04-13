@@ -62,3 +62,9 @@ class bin:
             "h":{"x":length,"y":width,"z":0},
         }
         return coordinates
+
+    def printBin(self):
+        """
+        This method will nicely print a bin's attributes and its contents.
+        """
+        pass

@@ -3,15 +3,12 @@
 # this is the bin class
 class bin:
     """
-    This class is for the larger bins, which there are infinite. The goal is to place smaller boxes into the least amount of larger bins.
+    This class is for the larger bins, which there are infinite. The goal is to place smaller boxes into the least amount of (these) larger bins.
     """
-    def __init__(self) -> None:
-        """
-        Initalize method for a bin. This object will be filled with smaller boxes. 
-        """
-        self.height = 10
-        self.length = 10
-        self.width = 10
+    def __init__(self,height,length,width) -> None:
+        self.height = 5 #height
+        self.length = 5 #length
+        self.width = 5 #width
         self.totalVolume = self.height * self.length * self.width
         self.usableVolume = self.totalVolume
         self.contains = []
@@ -32,6 +29,7 @@ class bin:
         If this is accomplished, the bin will update bin.strips, and bin.contains.\n
         This method will return True if the operation has been successfully been completed, else it returns False.
         """
+        placed = False
         volume = dimensions["height"] * dimensions["length"] * dimensions["width"]
         rotationA = dimensions
         rotationB = {"height":dimensions["length"],"length":dimensions["height"],"width":dimensions["width"]}
@@ -40,10 +38,13 @@ class bin:
         for i in range(len(self.strips)):
             if self.strips[i]["volume"] <= volume:
                 if max([dimensions["height"], dimensions["length"], dimensions["width"]]) <= max([self.strips[i]["length"],self.strips[i]["height"],self.strips[i]["width"]]):
-                    pass
-        # update self.stips with new strips
-        # sort self.strips from smallest to largest on volume
+                    # how is the item placed?
+                    # update self.stips with new strips
+                    
+                    self.strips.sort(key=lambda item: item.get("volume"))
+                    placed = True
         # based on if the method completed successfully (found and placed a strip) or not, return true or false
+        return placed
 
     def createCoordinates(self,height,length,width):
         """

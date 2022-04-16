@@ -1,5 +1,6 @@
 # imports
-import box
+from box import box
+import json
 
 # this is the bin class
 class bin:
@@ -63,8 +64,20 @@ class bin:
         }
         return coordinates
 
-    def printBin(self):
+    def display(self):
         """
         This method will nicely print a bin's attributes and its contents.
+        """
+        print(f"height: {self.height}, length: {self.length}, width: {self.width}, total volume: {self.totalVolume}, usable volume: {self.usableVolume}")
+        print(f"contains boxes: {self.contains}")
+        print("strips:")
+        for i in range(len(self.strips)):
+            print(f"height: {self.strips[i]['height']}, length: {self.strips[i]['length']}, width: {self.strips[i]['width']}, volume: {self.strips[i]['volume']}")
+            pretty = json.dumps(self.strips[i]['coordinates'], indent=4)
+            print(pretty)
+
+    def show3D(self):
+        """
+        This method attempts to show a 3 dimensional view of the filled spaces inside the bin
         """
         pass

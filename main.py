@@ -4,8 +4,13 @@ from box import box
 
 
 if __name__ == "__main__":
+    
+    tester = bin(12,9,6)
+    tester.display()
+
+
     # create empty list of bins and a list of boxes with dimensions
-    binsA = []
+    """ binsA = []
     binsB = []
     binsC = []
     boxesA = []
@@ -48,7 +53,7 @@ if __name__ == "__main__":
     for i in range(6):
         a = box(6,2,2)
         boxesC.append(a)
-    # scenario C box placement
+    # scenario C box placement """
 
     """ # testing if the box objects were created properly
     print("boxesA:")

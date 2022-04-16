@@ -7,9 +7,9 @@ class bin:
     This class is for the larger bins, which there are infinite. The goal is to place smaller boxes into the least amount of (these) larger bins.
     """
     def __init__(self,height,length,width) -> None:
-        self.height = 5 #height
-        self.length = 5 #length
-        self.width = 5 #width
+        self.height = 12 #height
+        self.length = 9 #length
+        self.width = 6 #width
         self.totalVolume = self.height * self.length * self.width
         self.usableVolume = self.totalVolume
         self.contains = []

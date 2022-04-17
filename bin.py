@@ -8,9 +8,9 @@ class bin:
     This class is for the larger bins, which there are infinite. The goal is to place smaller boxes into the least amount of (these) larger bins.
     """
     def __init__(self,height,length,width) -> None:
-        self.height = 12 #height
-        self.length = 9 #length
-        self.width = 6 #width
+        self.height = height 
+        self.length = length 
+        self.width = width 
         self.totalVolume = self.height * self.length * self.width
         self.usableVolume = self.totalVolume
         self.contains = []
@@ -78,6 +78,7 @@ class bin:
                                         "h":{"x":(self.strips[i]["coordinates"]["e"]["x"] + boxCoordinates["h"]["x"]),"y":self.strips[i]["coordinates"]["e"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]}
                                     }
                                     self.strips.pop(i)
+                                    box.placed = True
                                     self.contains.append(box)
                                     stripA = self.createStrip(stripACoordinates)
                                     stripB = self.createStrip(stripBCoordinates)
@@ -112,7 +113,7 @@ class bin:
 
     def createStrip(self,coordinates):
         """
-        This method creates a strip dictionary to be added to the strips inside of the self.strips.
+        This method creates a strip dictionary to be added to the strips inside of the self.strips.\n
         It takes coordinates to build the height, lenght, width and volume.
         """
         height = (coordinates["b"]["z"] - coordinates["a"]["z"])
@@ -127,15 +128,14 @@ class bin:
             }
         return strip
 
-
     def display(self):
         """
         This method will nicely print a bin's attributes and its contents.
         """
         print(f"height: {self.height}, length: {self.length}, width: {self.width}, total volume: {self.totalVolume}, usable volume: {self.usableVolume}, # of strips: {len(self.strips)}")
         print(f"cotains ({len(self.contains)}):")
-        for i in range(len(self.contains)):
-            self.contains[i].display()
+        #for i in range(len(self.contains)):
+        #    self.contains[i].display()
         print("strips:")
         for i in range(len(self.strips)):
             print(f"height: {self.strips[i]['height']}, length: {self.strips[i]['length']}, width: {self.strips[i]['width']}, volume: {self.strips[i]['volume']}")
@@ -145,6 +145,7 @@ class bin:
 
     def show3D(self):
         """
-        This method attempts to show a 3 dimensional view of the filled spaces inside the bin
+        This method attempts to show a 3 dimensional view of the filled spaces inside the bin.\n
+        This method currently does not work.
         """
         pass

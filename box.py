@@ -36,4 +36,7 @@ class box:
         return coordinates
 
     def returnCoordinates(self):
+        """
+        Returns the dictionary of the box's coordinates.
+        """
         return self.coordinates

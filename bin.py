@@ -37,14 +37,55 @@ class bin:
         rotationB = {"height":dimensions["length"],"length":dimensions["height"],"width":dimensions["width"]}
         rotationC = {"height":dimensions["width"],"length":dimensions["height"],"width":dimensions["length"]}
         rotations = [rotationA,rotationB,rotationC]
-        for i in range(len(self.strips)):
-            if self.strips[i]["volume"] <= volume:
-                if max([dimensions["height"], dimensions["length"], dimensions["width"]]) <= max([self.strips[i]["length"],self.strips[i]["height"],self.strips[i]["width"]]):
-                    # how is the item placed?
-                    # update self.stips with new strips
-                    
-                    self.strips.sort(key=lambda item: item.get("volume"))
-                    placed = True
+        
+        if placed is False:
+            for i in range(len(self.strips)):
+                if self.strips[i]["volume"] <= volume:
+                    if max([dimensions["height"], dimensions["length"], dimensions["width"]]) <= max([self.strips[i]["length"],self.strips[i]["height"],self.strips[i]["width"]]):
+                        if placed is False:
+                            for j in range(len(rotations)):
+                                if rotations[j]["length"] <= self.strips[i]["length"] and rotations[j]["height"] <= self.strips[i]["height"] and rotations[j]["width"] <= self.strips[i]["width"]:
+                                    boxCoordinates = self.createCoordinates(rotations[j]["height"],rotations[j]["length"],rotations[j]["width"])
+                                    stripACoordinates = {
+                                        "a":{"x":self.strips[i]["coordinates"]["a"]["x"],"y":self.strips[i]["coordinates"]["a"]["y"],"z":(self.strips[i]["coordinates"]["a"]["z"] + boxCoordinates["b"]["z"])},
+                                        "b":{"x":self.strips[i]["coordinates"]["b"]["x"],"y":self.strips[i]["coordinates"]["b"]["y"],"z":self.strips[i]["coordinates"]["b"]["z"]},
+                                        "c":{"x":self.strips[i]["coordinates"]["c"]["x"],"y":self.strips[i]["coordinates"]["c"]["y"],"z":self.strips[i]["coordinates"]["c"]["z"]},
+                                        "d":{"x":self.strips[i]["coordinates"]["d"]["x"],"y":self.strips[i]["coordinates"]["d"]["y"],"z":(self.strips[i]["coordinates"]["d"]["z"] + boxCoordinates["c"]["z"])},
+                                        "e":{"x":self.strips[i]["coordinates"]["e"]["x"],"y":self.strips[i]["coordinates"]["e"]["y"],"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["f"]["z"])},
+                                        "f":{"x":self.strips[i]["coordinates"]["f"]["x"],"y":self.strips[i]["coordinates"]["f"]["y"],"z":self.strips[i]["coordinates"]["f"]["z"]},
+                                        "g":{"x":self.strips[i]["coordinates"]["g"]["x"],"y":self.strips[i]["coordinates"]["g"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
+                                        "h":{"x":self.strips[i]["coordinates"]["h"]["x"],"y":self.strips[i]["coordinates"]["h"]["y"],"z":(self.strips[i]["coordinates"]["h"]["z"] + boxCoordinates["g"["z"]])},
+                                    }
+                                    stripBCoordinates = {
+                                        "a":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["d"]["x"]),"y":self.strips[i]["coordinates"]["a"]["y"],"z":self.strips[i]["coordinates"]["a"]["z"]},
+                                        "b":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["d"]["x"]),"y":self.strips[i]["coordinates"]["a"]["y"],"z":(self.strips[i]["coordinates"]["a"]["z"] + boxCoordinates["c"]["z"])},
+                                        "c":{"x":self.strips[i]["coordinates"]["d"]["x"],"y":self.strips[i]["coordinates"]["d"]["y"],"z":(self.strips[i]["coordinates"]["d"]["z"] + boxCoordinates["c"]["z"])},
+                                        "d":{"x":self.strips[i]["coordinates"]["d"]["x"],"y":self.strips[i]["coordinates"]["d"]["y"],"z":self.strips[i]["coordinates"]["d"]["z"]},
+                                        "e":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["d"]["x"]),"y":self.strips[i]["coordinates"]["e"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
+                                        "f":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["d"]["x"]),"y":self.strips[i]["coordinates"]["e"]["y"],"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["c"]["z"])},
+                                        "g":{"x":self.strips[i]["coordinates"]["h"]["x"],"y":self.strips[i]["coordinates"]["h"]["y"],"z":(self.strips[i]["coordinates"]["h"]["z"] + boxCoordinates["c"]["z"])},
+                                        "h":{"x":self.strips[i]["coordinates"]["h"]["x"],"y":self.strips[i]["coordinates"]["h"]["y"],"z":self.strips[i]["coordinates"]["h"]["z"]},
+                                    }
+                                    stripCCoordinates = {
+                                        "a":{"x":self.strips[i]["coordinates"]["a"]["x"],"y":(self.strips[i]["coordinates"]["a"]["y"] + boxCoordinates["e"]["y"]),"z":self.strips[i]["coordinates"]["a"]["z"]},
+                                        "b":{"x":self.strips[i]["coordinates"]["a"]["x"],"y":(self.strips[i]["coordinates"]["a"]["y"] + boxCoordinates["e"]["y"]),"z":(self.strips[i]["coordinates"]["a"]["z"] + boxCoordinates["f"]["z"])},
+                                        "c":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["c"]["x"]),"y":(self.strips[i]["coordinates"]["a"]["y"] + boxCoordinates["e"]["y"]),"z":(self.strips[i]["coordinates"]["a"]["z"] + boxCoordinates["f"]["z"])},
+                                        "d":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["c"]["x"]),"y":(self.strips[i]["coordinates"]["a"]["y"] + boxCoordinates["e"]["y"]),"z":self.strips[i]["coordinates"]["a"]["z"]},
+                                        "e":{"x":self.strips[i]["coordinates"]["e"]["x"],"y":self.strips[i]["coordinates"]["e"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
+                                        "f":{"x":self.strips[i]["coordinates"]["e"]["x"],"y":self.strips[i]["coordinates"]["e"]["y"],"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["f"]["z"])},
+                                        "g":{"x":(self.strips[i]["coordinates"]["e"]["x"] + boxCoordinates["g"]["x"]),"y":(self.strips[i]["coordinates"]["e"]["y"] + boxCoordinates["g"]["y"]),"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["g"]["z"])},
+                                        "h":{"x":(self.strips[i]["coordinates"]["e"]["x"] + boxCoordinates["h"]["x"]),"y":self.strips[i]["coordinates"]["e"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
+                                    }
+                                    self.strips.pop(i)
+                                    stripA = self.createStrip(stripACoordinates)
+                                    stripB = self.createStrip(stripBCoordinates)
+                                    stripC = self.createStrip(stripCCoordinates)
+                                    self.strips.append(stripA)
+                                    self.strips.append(stripB)
+                                    self.strips.append(stripC)
+                                    # update self.stips with new strips
+                                    self.strips.sort(key=lambda item: item.get("volume"))
+                                    placed = True
         # based on if the method completed successfully (found and placed a strip) or not, return true or false
         return placed
 
@@ -63,6 +104,13 @@ class bin:
             "h":{"x":length,"y":width,"z":0},
         }
         return coordinates
+
+    def createStrip(coordinates):
+        """
+        This method creates a strip dictionary to be added to the strips inside of the self.strips.
+        It takes coordinates to build the height, lenght, width and volume.
+        """
+        pass
 
     def display(self):
         """

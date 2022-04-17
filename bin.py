@@ -13,7 +13,6 @@ class bin:
         self.width = 6 #width
         self.totalVolume = self.height * self.length * self.width
         self.usableVolume = self.totalVolume
-        self.contains = []
         self.strips = [
             {
                 "height":self.height,
@@ -38,9 +37,9 @@ class bin:
         rotationC = {"height":dimensions["width"],"length":dimensions["height"],"width":dimensions["length"]}
         rotations = [rotationA,rotationB,rotationC]
         
-        if placed is False:
+        if placed == False:
             for i in range(len(self.strips)):
-                if self.strips[i]["volume"] <= volume:
+                if self.strips[i]["volume"] >= volume:
                     if max([dimensions["height"], dimensions["length"], dimensions["width"]]) <= max([self.strips[i]["length"],self.strips[i]["height"],self.strips[i]["width"]]):
                         if placed is False:
                             for j in range(len(rotations)):
@@ -54,7 +53,7 @@ class bin:
                                         "e":{"x":self.strips[i]["coordinates"]["e"]["x"],"y":self.strips[i]["coordinates"]["e"]["y"],"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["f"]["z"])},
                                         "f":{"x":self.strips[i]["coordinates"]["f"]["x"],"y":self.strips[i]["coordinates"]["f"]["y"],"z":self.strips[i]["coordinates"]["f"]["z"]},
                                         "g":{"x":self.strips[i]["coordinates"]["g"]["x"],"y":self.strips[i]["coordinates"]["g"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
-                                        "h":{"x":self.strips[i]["coordinates"]["h"]["x"],"y":self.strips[i]["coordinates"]["h"]["y"],"z":(self.strips[i]["coordinates"]["h"]["z"] + boxCoordinates["g"["z"]])},
+                                        "h":{"x":self.strips[i]["coordinates"]["h"]["x"],"y":self.strips[i]["coordinates"]["h"]["y"],"z":self.strips[i]["coordinates"]["g"]["z"]},
                                     }
                                     stripBCoordinates = {
                                         "a":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["d"]["x"]),"y":self.strips[i]["coordinates"]["a"]["y"],"z":self.strips[i]["coordinates"]["a"]["z"]},
@@ -73,16 +72,18 @@ class bin:
                                         "d":{"x":(self.strips[i]["coordinates"]["a"]["x"] + boxCoordinates["c"]["x"]),"y":(self.strips[i]["coordinates"]["a"]["y"] + boxCoordinates["e"]["y"]),"z":self.strips[i]["coordinates"]["a"]["z"]},
                                         "e":{"x":self.strips[i]["coordinates"]["e"]["x"],"y":self.strips[i]["coordinates"]["e"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
                                         "f":{"x":self.strips[i]["coordinates"]["e"]["x"],"y":self.strips[i]["coordinates"]["e"]["y"],"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["f"]["z"])},
-                                        "g":{"x":(self.strips[i]["coordinates"]["e"]["x"] + boxCoordinates["g"]["x"]),"y":(self.strips[i]["coordinates"]["e"]["y"] + boxCoordinates["g"]["y"]),"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["g"]["z"])},
+                                        "g":{"x":(self.strips[i]["coordinates"]["e"]["x"] + boxCoordinates["g"]["x"]),"y":self.strips[i]["coordinates"]["e"]["y"],"z":(self.strips[i]["coordinates"]["e"]["z"] + boxCoordinates["g"]["z"])},
                                         "h":{"x":(self.strips[i]["coordinates"]["e"]["x"] + boxCoordinates["h"]["x"]),"y":self.strips[i]["coordinates"]["e"]["y"],"z":self.strips[i]["coordinates"]["e"]["z"]},
                                     }
                                     self.strips.pop(i)
+                                    self.usableVolume = self.usableVolume - volume
                                     stripA = self.createStrip(stripACoordinates)
                                     stripB = self.createStrip(stripBCoordinates)
                                     stripC = self.createStrip(stripCCoordinates)
                                     self.strips.append(stripA)
                                     self.strips.append(stripB)
                                     self.strips.append(stripC)
+                                    print("\ndisplaying strips\n")
                                     # update self.stips with new strips
                                     self.strips.sort(key=lambda item: item.get("volume"))
                                     placed = True
@@ -105,7 +106,7 @@ class bin:
         }
         return coordinates
 
-    def createStrip(coordinates):
+    def createStrip(self,coordinates):
         """
         This method creates a strip dictionary to be added to the strips inside of the self.strips.
         It takes coordinates to build the height, lenght, width and volume.
@@ -128,7 +129,6 @@ class bin:
         This method will nicely print a bin's attributes and its contents.
         """
         print(f"height: {self.height}, length: {self.length}, width: {self.width}, total volume: {self.totalVolume}, usable volume: {self.usableVolume}")
-        print(f"contains boxes: {self.contains}")
         print("strips:")
         for i in range(len(self.strips)):
             print(f"height: {self.strips[i]['height']}, length: {self.strips[i]['length']}, width: {self.strips[i]['width']}, volume: {self.strips[i]['volume']}")

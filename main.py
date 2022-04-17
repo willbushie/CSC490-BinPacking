@@ -5,8 +5,13 @@ from box import box
 
 if __name__ == "__main__":
     
-    tester = bin(12,9,6)
-    tester.display()
+    print("\ncreating bin and box")
+    binn = bin(12,9,6)
+    boxx = box(5,4,3)
+    print("attempting to place box inside of bin")
+    binn.fillStrip(boxx.getDimensions())
+    print("displaying bin after supposed placement")
+    binn.display()
 
 
     # create empty list of bins and a list of boxes with dimensions

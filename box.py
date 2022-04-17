@@ -11,3 +11,9 @@ class box:
         Display the box's attributes cleanly
         """
         print(f"placed: {self.placed} height: {self.height} length: {self.length} width: {self.width} volume: {self.volume}")
+    
+    def getDimensions(self):
+        """
+        This method returns the height, width, and length in a dictionary.
+        """
+        return {"height":self.height,"length":self.length,"width":self.width}

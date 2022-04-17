@@ -110,7 +110,18 @@ class bin:
         This method creates a strip dictionary to be added to the strips inside of the self.strips.
         It takes coordinates to build the height, lenght, width and volume.
         """
-        pass
+        height = (coordinates["b"]["z"] - coordinates["a"]["z"])
+        length = (coordinates["d"]["x"] - coordinates["a"]["x"])
+        width = (coordinates["e"]["y"] - coordinates["a"]["y"])
+        strip = {
+                "height":height,
+                "length":length,
+                "width":width,
+                "volume":(length * width * height),
+                "coordinates":coordinates
+            }
+        return strip
+
 
     def display(self):
         """

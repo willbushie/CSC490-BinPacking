@@ -43,7 +43,9 @@ This project evaluated packaging smaller boxes/bins within larger ones. This is 
 5. Matplotlib Visualization Issue
     - While integrating Matplotlib into the program, I ran into an issue where the visualization would continually fill underneath the when there should be open space. The issue was a the way I was visualizing the item, and just needed to cancel out the "overlap." Needed an XOR instead of an OR. 
 
-![Issue Unresolved](./assets/visual-issue(unresolved).png) | ![Issue Resolved](./assets/visual-issue(resolved).png)
+| Issue Unresolved | Issue Resolved |
+|---------|---------|
+| ![Overhang Filled](./assets/visual-issue(unresolved).png) | ![Overhang Unfilled](./assets/visual-issue(resolved).png)
 
 ## What I Would Do Differntly
 - Instead of continually creating smaller and smaller sub sections within a larger box, I would evaluate the subsections, to see if any of them form a prism which could be combined, creating a larger sub section. This could add time to the overall program execution, but if I only evaluated the immediate/touching subsections, it would cut down on the total number that I would need to evaluate. 

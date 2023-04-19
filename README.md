@@ -47,7 +47,7 @@ This project evaluated packaging smaller boxes/bins within larger ones. This is 
 |---------|---------|
 | ![Overhang Filled](./assets/visual-issue(unresolved).png) | ![Overhang Unfilled](./assets/visual-issue(resolved).png)
 
-## What I Would Do Differntly
+## What I Would Do Differently
 - Instead of continually creating smaller and smaller sub sections within a larger box, I would evaluate the subsections, to see if any of them form a prism which could be combined, creating a larger sub section. This could add time to the overall program execution, but if I only evaluated the immediate/touching subsections, it would cut down on the total number that I would need to evaluate. 
 - I would color the smaller boxes with distinct colors in the visualization, instead of the same color. I think this would allow a better view of which boxes were placed where. 
 - I would output how many smaller boxes were placed within each larger box. I think this, in addition to the colorization would help better understand where the smaller boxes were placed. 
